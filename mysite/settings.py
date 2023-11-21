@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from .config import load_config, Config
+
+# Import configuration
+CONFIG = load_config()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,8 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q14a68gzv10)$qda=h7_#6)$$0g5xj_p078$q_g8_)ltz@hqn*'
-
+SECRET_KEY = CONFIG.server.secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -122,3 +125,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# SMTP server settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = CONFIG.email.host
+EMAIL_HOST_USER = CONFIG.email.user
+EMAIL_HOST_PASSWORD = CONFIG.email.password
+EMAIL_PORT = CONFIG.email.port
+EMAIL_USE_TLS = CONFIG.email.use_tls
