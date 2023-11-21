@@ -10,8 +10,13 @@ class EmailConfig:
     use_tls: bool
 
 @dataclass
+class Server:
+    secret_key: str
+
+@dataclass
 class Config:
     email: EmailConfig
+    server: Server
 
 def load_config(path:str=None) -> Config:
     env = Env()
@@ -23,4 +28,7 @@ def load_config(path:str=None) -> Config:
                                     password=env('EMAIL_HOST_PASSWORD'),
                                     port=int(env('EMAIL_PORT')),
                                     use_tls=env('EMAIL_USE_TLS') in ['True', '1']
-                                    ))
+                                    ),
+                  server=Server(
+                                secret_key=env('SECRET_KEY')
+                                ))
