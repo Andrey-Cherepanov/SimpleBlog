@@ -12,8 +12,8 @@
     </h2>
     <p class="tags">
       Tags:
-      {% for tags in post.tags.all %}
-        <a href="{% url "blog:post_list_by_tag" tag.slug %}">
+      {% for tag in post.tags.all %}
+        <a href="{% url 'blog:post_list_by_tag' tag.slug %}">
           {{ tag.name }}
         </a>
       {% endfor %}
