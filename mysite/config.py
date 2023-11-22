@@ -14,9 +14,16 @@ class Server:
     secret_key: str
 
 @dataclass
+class DB:
+    table: str
+    user: str
+    password:str
+
+@dataclass
 class Config:
     email: EmailConfig
     server: Server
+    db: DB
 
 def load_config(path:str=None) -> Config:
     env = Env()
@@ -31,4 +38,9 @@ def load_config(path:str=None) -> Config:
                                     ),
                   server=Server(
                                 secret_key=env('SECRET_KEY')
-                                ))
+                                ),
+                  db=DB(
+                    table=env('DB_TABLE'),
+                    user=env('DB_USER'),
+                    password=env('DB_PASSWORD')
+                  ))
