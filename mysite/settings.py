@@ -142,3 +142,7 @@ EMAIL_HOST_USER = CONFIG.email.user
 EMAIL_HOST_PASSWORD = CONFIG.email.password
 EMAIL_PORT = CONFIG.email.port
 EMAIL_USE_TLS = CONFIG.email.use_tls
+
+# Login redirection
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
