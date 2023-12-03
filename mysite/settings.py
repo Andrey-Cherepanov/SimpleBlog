@@ -146,4 +146,6 @@ EMAIL_USE_TLS = CONFIG.email.use_tls
 
 # Login redirection
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+
+# Cookie settings
+SESSION_COOKIE_AGE = 60*60*24*30
