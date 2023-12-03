@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from .forms import SignUpForm
 from django.shortcuts import render, redirect
+from .forms import SignUpForm, LoginForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
+from django.contrib.auth.views import LoginView
 
 class SignUpView(generic.CreateView):
     form_class = SignUpForm
@@ -34,3 +34,14 @@ class SignUpView(generic.CreateView):
 
         return render(request, self.template_name, {'form': form})
 
+class CustomLoginView(LoginView):
+    form_class = LoginForm
+
+    def form_valid(self, form):
+        remember_me = form.cleaned_data.get('remember_me')
+
+        if not remember_me:
+            self.request.sessions.set_expiry(0)
+            self.request.sessions.modified = True
+
+        return super(CustomLoginView, self).form_valid(form)
