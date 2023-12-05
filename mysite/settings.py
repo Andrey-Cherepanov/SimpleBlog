@@ -149,3 +149,7 @@ LOGIN_REDIRECT_URL = '/'
 
 # Cookie settings
 SESSION_COOKIE_AGE = 60*60*24*30
+
+# Media storage settings
+MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_URL = '/media/'
