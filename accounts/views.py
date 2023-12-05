@@ -3,7 +3,8 @@ from .forms import SignUpForm, LoginForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib import messages
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 
 class SignUpView(generic.CreateView):
     form_class = SignUpForm
@@ -45,3 +46,7 @@ class CustomLoginView(LoginView):
             self.request.sessions.modified = True
 
         return super(CustomLoginView, self).form_valid(form)
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'registration/change_password.html'
+    success_message = 'Successfully Changed Your Password'
+    success_url = reverse_lazy('user-profile')
