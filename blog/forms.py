@@ -1,4 +1,5 @@
 from django import forms
+from django_summernote.widgets import SummernoteWidget
 from .models import Comment
 
 class EmailPostForm(forms.Form):
@@ -9,6 +10,8 @@ class EmailPostForm(forms.Form):
                                widget=forms.Textarea)
 
 class CommentForm(forms.ModelForm):
+    body = forms.CharField(required=True,
+                           widget=SummernoteWidget())
     class Meta:
         model = Comment
         fields = ['name', 'email', 'body']

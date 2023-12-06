@@ -1,4 +1,7 @@
 from django.contrib import admin
 from accounts.models import Profile
+from django_summernote.admin import SummernoteModelAdmin
 
-admin.site.register(Profile)
+@admin.register(Profile)
+class MyProfile(SummernoteModelAdmin):
+    summernote_fields = ('bio',)
