@@ -20,10 +20,27 @@ class DB:
     password:str
 
 @dataclass
+class GitHubAuth:
+    key: str
+    secret_key: str
+
+@dataclass
+class GoogleAuth:
+    client: str
+    secret: str
+
+@dataclass
+class SocialAuth:
+    github: GitHubAuth
+    google: GoogleAuth
+
+@dataclass
 class Config:
     email: EmailConfig
     server: Server
     db: DB
+    social_auth: SocialAuth
+
 
 def load_config(path:str=None) -> Config:
     env = Env()
@@ -43,4 +60,14 @@ def load_config(path:str=None) -> Config:
                     table=env('DB_TABLE'),
                     user=env('DB_USER'),
                     password=env('DB_PASSWORD')
+                  ),
+                  social_auth=SocialAuth(
+                    github=GitHubAuth(
+                        key=env('SOCIAL_AUTH_GITHUB_KEY'),
+                        secret_key=env('SOCIAL_AUTH_GITHUB_SECRET_KEY')
+                    ),
+                    google=GoogleAuth(
+                        client=env('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY'),
+                        secret=env('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+                    )
                   ))

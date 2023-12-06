@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.postgres',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -153,3 +156,18 @@ SESSION_COOKIE_AGE = 60*60*24*30
 # Media storage settings
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
+
+# Auth settings
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Social auth config for github
+SOCIAL_AUTH_GITHUB_KEY = CONFIG.social_auth.github.key
+SOCIAL_AUTH_GITHUB_SECRET = CONFIG.social_auth.github.secret_key
+
+# ... for google
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = CONFIG.social_auth.google.client
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = CONFIG.social_auth.google.secret
