@@ -57,7 +57,7 @@ INSTALLED_APPS = [
 # Rest settings
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "reset_framework.permissions.AllowAny",
+        "rest_framework.permissions.AllowAny",
     ],
 }
 
