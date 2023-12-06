@@ -50,7 +50,15 @@ INSTALLED_APPS = [
     'social_django',
     'django_summernote',
     'django_bootstrap5',
+    'rest_framework',
 ]
+
+# Rest settings
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "reset_framework.permissions.AllowAny",
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
