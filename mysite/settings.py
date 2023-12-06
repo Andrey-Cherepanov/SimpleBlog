@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'social_django',
     'django_summernote',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -172,3 +173,6 @@ SOCIAL_AUTH_GITHUB_SECRET = CONFIG.social_auth.github.secret_key
 # ... for google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = CONFIG.social_auth.google.client
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = CONFIG.social_auth.google.secret
+
+# Summernote theme
+SUMMERNOTE_THEME = 'bs5'
