@@ -43,8 +43,8 @@ class CustomLoginView(LoginView):
         remember_me = form.cleaned_data.get('remember_me')
 
         if not remember_me:
-            self.request.sessions.set_expiry(0)
-            self.request.sessions.modified = True
+            self.request.session.set_expiry(0)
+            self.request.session.modified = True
 
         return super(CustomLoginView, self).form_valid(form)
 
