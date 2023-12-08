@@ -1,7 +1,8 @@
-from rest_framework import generics, filters
+from rest_framework import generics, filters, permissions
 from blog.models import Post
 from .serializers import PostSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from .permissions import IsAuthorOrReadOnly
 
 class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
@@ -28,3 +29,4 @@ class UserPostList(generics.ListAPIView):
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = (IsAuthorOrReadOnly,)
